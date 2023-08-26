@@ -1,0 +1,53 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.log-table-container{
+    margin-bottom: 2rem;
+    /* display: none; */
+    overflow-x: auto;
+}
+
+#logs_table {
+    margin: 3rem auto 1rem auto;
+    border-collapse: collapse;
+    width: 95%;
+    text-align: center;
+  }
+  
+  #logs_table td,
+  #logs_table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  #logs_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04aa6d;
+    color: white;
+  }
+
+  .sort_icon{
+    cursor: pointer;
+  }
+
+
+
+  .modal_table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .modal_table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .modal_table tr:hover {
+    background-color: #ddd;
+  }
+  

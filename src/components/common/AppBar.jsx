@@ -1,6 +1,6 @@
-import {Container,Nav,Navbar} from "react-bootstrap";
-import logo from '../../assets/Images/1_fin.png'
-import '../../assets/css/AppBar.css'
+import {Container, Nav, Navbar} from "react-bootstrap";
+import logo from "../../assets/Images/1_fin.png";
+import "../../assets/css/AppBar.css";
 
 function AppBar() {
   return (
@@ -18,8 +18,9 @@ function AppBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="#">Link</Nav.Link>
+            <Nav.Link href="/logs">Logs</Nav.Link>
+            <Nav.Link href="/email">Email</Nav.Link>
+            <Nav.Link href="/whatsapp">Whatsapp</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,0 +1,37 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+#custom_table-container{
+    margin-bottom: 2rem;
+    /* display: none; */
+    overflow-x: auto;
+}
+
+#cus_table {
+    margin: 3rem auto 1rem auto;
+    border-collapse: collapse;
+    width: 95%;
+    text-align: center;
+  }
+  
+  #cus_table td,
+  #cus_table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  #cus_table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #04aa6d;
+    color: white;
+  }
+
+  .sort_icon{
+    cursor: pointer;
+  }
