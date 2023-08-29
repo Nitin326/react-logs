@@ -3,6 +3,8 @@ import CTable from "./common/CTable";
 import axios from "axios";
 import CPagination from "./common/CPagination";
 import Search from "./common/Search";
+import '../assets/css/Home.css';
+
 
 const WaNotify = () => {
   const [data, setData] = useState([]);
@@ -10,8 +12,7 @@ const WaNotify = () => {
   const [pageLength] = useState(10);
   const [order, setOrder] = useState("desc");
   const [type, setType] = useState("");
-  const [totalPage, setTotalPage] = useState('');
-
+  const [totalPage, setTotalPage] = useState("");
 
   useEffect(() => {
     axios
@@ -28,7 +29,7 @@ const WaNotify = () => {
       )
       .then((response) => {
         setData(response.data.data);
-        setTotalPage(Math.ceil(response.data.totalCount/pageLength));
+        setTotalPage(Math.ceil(response.data.totalCount / pageLength));
       })
       .catch((err) => {
         console.error(err);
@@ -50,12 +51,13 @@ const WaNotify = () => {
 
   return (
     <>
-      {/* Search filter */}
-      <Search handleFunc={handleSearch} />
-      {/* Table */}
-      <CTable data={data} func={handleOrder} />
-      {/* Pagination */}
-      <CPagination handleFunc={handlePageClick} pages = {totalPage} />
+      {data.length > 0 ? (
+        <div>
+          <Search handleFunc={handleSearch} />
+          <CTable data={data} func={handleOrder} />
+          <CPagination handleFunc={handlePageClick} pages={totalPage} />
+        </div>
+      ): <div className="not-found">No Data found!</div>}
     </>
   );
 };

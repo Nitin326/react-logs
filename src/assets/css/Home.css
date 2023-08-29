@@ -53,3 +53,10 @@
     max-width: 90%;
   }
 }
+
+.not-found{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 5rem;
+}

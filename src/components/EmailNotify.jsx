@@ -3,13 +3,14 @@ import CTable from "./common/CTable";
 import axios from "axios";
 import CPagination from "./common/CPagination";
 import Search from "./common/Search";
+import '../assets/css/Home.css';
 
 const EmailNotify = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLength] = useState(10);
   const [order, setOrder] = useState("desc");
-  const [totalPage, setTotalPage] = useState('');
+  const [totalPage, setTotalPage] = useState("");
   const [type, setType] = useState("");
 
   useEffect(() => {
@@ -27,7 +28,7 @@ const EmailNotify = () => {
       )
       .then((response) => {
         setData(response.data.data);
-        setTotalPage(Math.ceil(response.data.totalCount/pageLength));
+        setTotalPage(Math.ceil(response.data.totalCount / pageLength));
       })
       .catch((err) => {
         console.error(err);
@@ -49,12 +50,15 @@ const EmailNotify = () => {
 
   return (
     <>
-      {/* Search filter */}
-      <Search handleFunc={handleSearch} />
-      {/* Table */}
-      <CTable data={data} func={handleOrder} />
-      {/* Pagination */}
-      <CPagination handleFunc={handlePageClick} pages = {totalPage} />
+      {data.length > 0 ? (
+        <div>
+          <Search handleFunc={handleSearch} />
+          <CTable data={data} func={handleOrder} />
+          <CPagination handleFunc={handlePageClick} pages={totalPage} />
+        </div>
+      ) : (
+        <div className="not-found">No Data found!</div>
+      )}
     </>
   );
 };
