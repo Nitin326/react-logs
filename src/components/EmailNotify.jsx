@@ -9,7 +9,7 @@ const EmailNotify = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageLength] = useState(10);
   const [order, setOrder] = useState("desc");
-  const [totalPage, setTotalPage] = useState();
+  const [totalPage, setTotalPage] = useState('');
   const [type, setType] = useState("");
 
   useEffect(() => {
@@ -26,7 +26,8 @@ const EmailNotify = () => {
         }
       )
       .then((response) => {
-        setData(response.data);
+        setData(response.data.data);
+        setTotalPage(Math.ceil(response.data.totalCount/pageLength));
       })
       .catch((err) => {
         console.error(err);
@@ -53,7 +54,7 @@ const EmailNotify = () => {
       {/* Table */}
       <CTable data={data} func={handleOrder} />
       {/* Pagination */}
-      <CPagination handleFunc={handlePageClick} />
+      <CPagination handleFunc={handlePageClick} pages = {totalPage} />
     </>
   );
 };

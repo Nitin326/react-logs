@@ -10,6 +10,7 @@ const WaNotify = () => {
   const [pageLength] = useState(10);
   const [order, setOrder] = useState("desc");
   const [type, setType] = useState("");
+  const [totalPage, setTotalPage] = useState('');
 
 
   useEffect(() => {
@@ -26,7 +27,8 @@ const WaNotify = () => {
         }
       )
       .then((response) => {
-        setData(response.data);
+        setData(response.data.data);
+        setTotalPage(Math.ceil(response.data.totalCount/pageLength));
       })
       .catch((err) => {
         console.error(err);
@@ -53,7 +55,7 @@ const WaNotify = () => {
       {/* Table */}
       <CTable data={data} func={handleOrder} />
       {/* Pagination */}
-      <CPagination handleFunc={handlePageClick} />
+      <CPagination handleFunc={handlePageClick} pages = {totalPage} />
     </>
   );
 };

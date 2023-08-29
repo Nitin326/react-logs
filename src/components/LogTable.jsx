@@ -14,6 +14,7 @@ const LogTable = () => {
   const [order, setOrder] = useState("desc");
   const [myObj, setMyObj] = useState({});
   const [title, setTitle] = useState("");
+  const [totalPage, setTotalPage] = useState('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -28,7 +29,8 @@ const LogTable = () => {
         },
       })
       .then((response) => {
-        setData(response.data);
+        setData(response.data.logs);
+        setTotalPage(Math.ceil(response.data.totalCount/pageLength));
       })
       .catch((error) => {
         console.log(error);
@@ -144,7 +146,7 @@ const LogTable = () => {
           })}
         </table>
         {/* Pagination */}
-        <CPagination handleFunc={handlePageClick} />
+        <CPagination handleFunc={handlePageClick} pages = {totalPage} />
 
         {/* Modal */}
         <Modal size="lg" show={show} onHide={handleClose}>
@@ -168,135 +170,3 @@ const LogTable = () => {
 };
 
 export default LogTable;
-
-// const LogTable = (props) => {
-//   const [ReqBody, setReqBody] = useState({});
-//   const [title, setTitle] = useState("");
-
-//   return (
-//     <>
-//       <div className="dashboard_container">
-// <table id="logs_table">
-//   <tr>
-//     <th>id</th>
-//     <th>Method</th>
-//     <th>End Point</th>
-//     <th>Reqest Body</th>
-//     <th>User Id</th>
-//     <th>Response Body</th>
-//     <th>options</th>
-//     <th>status</th>
-//     <th>message</th>
-//     <th>log.description.name</th>
-//     <th>
-//       created_at
-//       <img
-//         className="sort_icon m-2"
-//         alt="down_arrow"
-//         src={sortDown}
-//         height="15px"
-//         width="15px"
-//         onClick={() => props.func("asc")}
-//       />
-//       <img
-//         className="sort_icon"
-//         alt="up_arrow"
-//         src={sortUp}
-//         height="15px"
-//         width="15px"
-//         onClick={() => props.func("desc")}
-//       />
-//     </th>
-//   </tr>
-//   {props.data.map((log, index) => {
-//     return (
-//       <tr key={index}>
-//         <td>{log.id || "-"}</td>
-//         <td>{log.method || "-"}</td>
-//         <td>{log.end_point || "-"}</td>
-//         <td>
-//           {typeof log.req_body === "object" ? (
-//             <Image
-//               src={view}
-//               width="20px"
-//               height="20px"
-//               style={{cursor: "pointer"}}
-//               onClick={() => {
-// handleShow();
-//                 setReqBody(log.req_body);
-//                 setTitle("Request");
-//               }}
-//             />
-//           ) : (
-//             "-"
-//           )}
-//         </td>
-//         <td>{log.customer_id || "-"}</td>
-//         <td>
-//           {typeof log.description.response == "object" &&
-//           Object.keys(log.description.response).length > 0 ? (
-//             <Image
-//               src={view}
-//               width="20px"
-//               height="20px"
-//               style={{cursor: "pointer"}}
-//               onClick={() => {
-// handleShow();
-//                 setReqBody(log.req_body);
-//                 setTitle("Response");
-//               }}
-//             />
-//           ) : (
-//             "-"
-//           )}
-//         </td>
-//         <td>
-//           {typeof log.description.options === "object" &&
-//           Object.keys(log.description.options).length > 0 ? (
-//             <Image
-//               src={view}
-//               alt="eye-icon"
-//               width="20px"
-//               height="20px"
-//               style={{cursor: "pointer"}}
-//               onClick={() => {
-// handleShow();
-//                 setReqBody(log.req_body);
-//                 setTitle("Options");
-//               }}
-//             />
-//           ) : (
-//             "-"
-//           )}
-//         </td>
-//         <td>{log.description.status || "-"}</td>
-//         <td>{log.description.message || "-"}</td>
-//         <td>{log.description.name || "-"}</td>
-//         <td>{log.created_at || "-"}</td>
-//       </tr>
-//     );
-//   })}
-// </table>
-
-//         {/* Modal */}
-// <Modal size="lg" show={show} onHide={handleClose}>
-//   <Modal.Header closeButton>
-//     <Modal.Title>{title} Body</Modal.Title>
-//   </Modal.Header>
-//   <Modal.Body style={{overflow: "auto"}}>
-//     <table className="modal_table">
-//       {Object.entries(ReqBody).map(([key, value]) => (
-//         <tr key={key}>
-//           <td>{key}</td>
-//           <td>{value}</td>
-//         </tr>
-//       ))}
-//     </table>
-//   </Modal.Body>
-// </Modal>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default LogTable;

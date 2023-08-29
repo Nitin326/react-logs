@@ -1,14 +1,14 @@
 import React from 'react'
 import ReactPaginate  from 'react-paginate'
 
-const CPagination = ({handleFunc}) => {
+const CPagination = ({handleFunc,pages}) => {
   return (
     <>
     <ReactPaginate
         nextLabel=">>"
         previousLabel="<<"
         onPageChange={handleFunc}
-        pageCount={17}
+        pageCount={pages}
         breakLabel="..."
         marginPagesDisplayed={2}
         containerClassName={"pagination justify-content-center"}
