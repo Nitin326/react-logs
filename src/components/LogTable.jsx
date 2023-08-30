@@ -6,6 +6,7 @@ import view from "../assets/Images/eye.svg";
 import axios from "axios";
 import "../assets/css/logTable.css";
 import CPagination from "./common/CPagination";
+import Cloder from "./common/Cloder";
 
 const LogTable = () => {
   const [data, setData] = useState([]);
@@ -15,6 +16,7 @@ const LogTable = () => {
   const [myObj, setMyObj] = useState({});
   const [title, setTitle] = useState("");
   const [totalPage, setTotalPage] = useState("");
+  const [loder, setLoder] = useState(true);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,6 +33,9 @@ const LogTable = () => {
       .then((response) => {
         setData(response.data.logs);
         setTotalPage(Math.ceil(response.data.totalCount / pageLength));
+        setTimeout(() => {
+          setLoder(false);
+        }, 5000);
       })
       .catch((error) => {
         console.log(error);
@@ -151,7 +156,13 @@ const LogTable = () => {
             <CPagination handleFunc={handlePageClick} pages={totalPage} />
           </div>
         ) : (
-          <div className="not-found">No Data found!</div>
+          <div className="loder">
+            {loder ? (
+              <Cloder/>
+            ) : (
+              <div className="not-found"> No Data Found!</div>
+            )}
+          </div>
         )}
 
         {/* Modal */}

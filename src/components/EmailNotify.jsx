@@ -3,7 +3,8 @@ import CTable from "./common/CTable";
 import axios from "axios";
 import CPagination from "./common/CPagination";
 import Search from "./common/Search";
-import '../assets/css/Home.css';
+import "../assets/css/Home.css";
+import Cloder from "./common/Cloder";
 
 const EmailNotify = () => {
   const [data, setData] = useState([]);
@@ -12,6 +13,7 @@ const EmailNotify = () => {
   const [order, setOrder] = useState("desc");
   const [totalPage, setTotalPage] = useState("");
   const [type, setType] = useState("");
+  const [loder, setLoder] = useState(true);
 
   useEffect(() => {
     axios
@@ -29,6 +31,9 @@ const EmailNotify = () => {
       .then((response) => {
         setData(response.data.data);
         setTotalPage(Math.ceil(response.data.totalCount / pageLength));
+        setTimeout(() => {
+          setLoder(false);
+        }, 5000);
       })
       .catch((err) => {
         console.error(err);
@@ -57,7 +62,13 @@ const EmailNotify = () => {
           <CPagination handleFunc={handlePageClick} pages={totalPage} />
         </div>
       ) : (
-        <div className="not-found">No Data found!</div>
+        <div className="loder">
+          {loder ? (
+            <Cloder/>
+          ) : (
+            <div className="not-found"> No Data Found!</div>
+          )}
+        </div>
       )}
     </>
   );
